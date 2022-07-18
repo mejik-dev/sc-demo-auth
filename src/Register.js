@@ -20,7 +20,11 @@ const Register = () => {
       password,
     });
 
-    if (!error) navigate('/login');
+    if (error) {
+      alert('Cant login!');
+    } else {
+      navigate('/home');
+    }
   };
 
   return (

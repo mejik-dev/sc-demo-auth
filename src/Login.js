@@ -16,7 +16,10 @@ const Login = () => {
       password,
     });
 
-    if (!error) navigate('/home');
+    if (error) {
+      alert('cant Login');
+    }
+    navigate('/home');
   };
 
   return (
