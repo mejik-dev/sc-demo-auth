@@ -1,12 +1,14 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
+import * as React from 'react';
+import { useLogout } from '../hooks/useLogout';
 
 const Home = () => {
+  const { handleLogout } = useLogout();
+
   return (
     <div className="App">
       <h2>Welcome</h2>
       <p>You are now in home page!</p>
-      <Link to="/">Back to register page</Link>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };
