@@ -1,0 +1,27 @@
+.App {
+  padding: 2rem;
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+}
+
+.App h2 {
+  margin-right: 0.5rem;
+}
+
+.link {
+  margin-left: 0.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  margin-bottom: 1rem;
+}
+
+.form label {
+  margin-top: 0.5rem;
+}

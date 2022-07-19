@@ -1,8 +1,10 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Login from './Login';
-import Register from './Register';
-import Home from './Home';
+import "./App.css";
+
+import * as React from "react";
+import { Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
 
 const App = () => {
   return (

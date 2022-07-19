@@ -1,6 +1,8 @@
-import { useMutation, gql } from '@apollo/client';
+import * as React from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation, gql } from "@apollo/client";
 
-const REGISTER_LOGIN = gql`
+const LOGIN = gql`
   mutation login($input: LoginInput) {
     login(input: $input) {
       token
@@ -12,16 +14,27 @@ const REGISTER_LOGIN = gql`
 `;
 
 export const useLogin = () => {
-  const [login, { data, loading, error }] = useMutation(REGISTER_LOGIN);
+  const navigate = useNavigate();
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-  return {
-    data,
-    error,
-    loading,
-    login: (input) => {
-      login({
-        variables: { input },
+  const [login] = useMutation(LOGIN);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      await login({
+        variables: {
+          input: { email, password },
+        },
       });
-    },
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+      alert("Failed to login");
+    }
   };
+
+  return { handleLogin, setEmail, setPassword };
 };

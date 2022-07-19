@@ -1,4 +1,6 @@
-import { useMutation, gql } from '@apollo/client';
+import * as React from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation, gql } from "@apollo/client";
 
 const REGISTER_QUERY = gql`
   mutation register($input: RegisterInput) {
@@ -12,16 +14,29 @@ const REGISTER_QUERY = gql`
 `;
 
 export const useRegister = () => {
-  const [register, { data, loading, error }] = useMutation(REGISTER_QUERY);
+  const navigate = useNavigate();
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-  return {
-    data,
-    error,
-    loading,
-    register: (input) => {
-      register({
-        variables: { input },
+  const [register] = useMutation(REGISTER_QUERY);
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    try {
+      await register({
+        variables: {
+          input: { firstName, lastName, email, password },
+        },
       });
-    },
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+      alert("Failed to register");
+    }
   };
+
+  return { handleRegister, setEmail, setFirstName, setLastName, setPassword };
 };
