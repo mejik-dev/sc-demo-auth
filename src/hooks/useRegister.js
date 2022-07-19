@@ -2,8 +2,8 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, gql } from "@apollo/client";
 
-const REGISTER_QUERY = gql`
-  mutation register($input: RegisterInput) {
+const REGISTER = gql`
+  mutation Register($input: RegisterInput) {
     register(input: $input) {
       token
       user {
@@ -20,7 +20,7 @@ export const useRegister = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const [register] = useMutation(REGISTER_QUERY);
+  const [register] = useMutation(REGISTER);
 
   const handleRegister = async (e) => {
     e.preventDefault();

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, gql } from "@apollo/client";
 
 const LOGIN = gql`
-  mutation login($input: LoginInput) {
+  mutation Login($input: LoginInput) {
     login(input: $input) {
       token
       user {
