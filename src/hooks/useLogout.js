@@ -1,6 +1,5 @@
-import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useMutation, gql } from '@apollo/client';
+import { useNavigate } from "react-router-dom";
+import { useMutation, gql } from "@apollo/client";
 
 const LOGOUT = gql`
   mutation logout($input: LogoutInput) {
@@ -12,7 +11,6 @@ const LOGOUT = gql`
 
 export const useLogout = () => {
   const navigate = useNavigate();
-  const [token] = React.useState(localStorage.getItem('token'));
 
   const [logout] = useMutation(LOGOUT);
 
@@ -20,17 +18,18 @@ export const useLogout = () => {
     e.preventDefault();
 
     try {
+      const token = localStorage.getItem("token");
+
       await logout({
         variables: {
           input: { token },
         },
       });
-
-      localStorage.clear('token');
-      navigate('/login');
+      localStorage.removeItem("token");
+      navigate("/login");
     } catch (error) {
       console.log(error);
-      alert('Failed to logout');
+      alert("Failed to logout");
     }
   };
 
